@@ -123,71 +123,66 @@ async function consultarVeiculo() {
         loading.classList.add("d-none");
 
         resultado.innerHTML = `
-            <div class="col-lg-6">
-                <div class="vehicle-card">
-                    <div class="vehicle-body">
-                        <span class="badge bg-primary mb-3">Resultado FIPE</span>
+    <div class="col-lg-8">
+        <div class="resultado-card-premium">
 
-                        <h3 class="vehicle-title">
-                            ${veiculo.Marca} ${veiculo.Modelo}
-                        </h3>
+            <div class="resultado-header-premium">
+                <span class="badge bg-primary">Resultado FIPE</span>
+                <h3>${veiculo.Marca} ${veiculo.Modelo}</h3>
+                <p>Informações oficiais retornadas pela API FIPE.</p>
+            </div>
 
-                        <p class="text-muted">
-                            Consulta realizada com dados dinâmicos da API FIPE.
-                        </p>
+            <div class="valor-principal">
+                <span>Valor FIPE estimado</span>
+                <h2>${veiculo.Valor}</h2>
+                <small>Referência: ${veiculo.MesReferencia}</small>
+            </div>
 
-                        <div class="row g-3 mt-3">
-                            <div class="col-md-6">
-                                <div class="info-mini">
-                                    <strong>Valor</strong>
-                                    <span>${veiculo.Valor}</span>
-                                </div>
-                            </div>
+            <div class="dados-veiculo-grid">
 
-                            <div class="col-md-6">
-                                <div class="info-mini">
-                                    <strong>Ano Modelo</strong>
-                                    <span>${veiculo.AnoModelo}</span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="info-mini">
-                                    <strong>Combustível</strong>
-                                    <span>${veiculo.Combustivel}</span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="info-mini">
-                                    <strong>Código FIPE</strong>
-                                    <span>${veiculo.CodigoFipe}</span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="info-mini">
-                                    <strong>Mês Referência</strong>
-                                    <span>${veiculo.MesReferencia}</span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="info-mini">
-                                    <strong>Tipo</strong>
-                                    <span>${veiculo.TipoVeiculo}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-primary mt-4" onclick='adicionarFavorito(${JSON.stringify(veiculo)})'>
-                            <i class="bi bi-heart"></i>
-                            Adicionar aos Favoritos
-                        </button>
+                <div class="dados-veiculo-item">
+                    <i class="bi bi-calendar-event"></i>
+                    <div>
+                        <strong>Ano Modelo</strong>
+                        <span>${veiculo.AnoModelo}</span>
                     </div>
                 </div>
+
+                <div class="dados-veiculo-item">
+                    <i class="bi bi-fuel-pump"></i>
+                    <div>
+                        <strong>Combustível</strong>
+                        <span>${veiculo.Combustivel}</span>
+                    </div>
+                </div>
+
+                <div class="dados-veiculo-item">
+                    <i class="bi bi-upc-scan"></i>
+                    <div>
+                        <strong>Código FIPE</strong>
+                        <span>${veiculo.CodigoFipe}</span>
+                    </div>
+                </div>
+
+                <div class="dados-veiculo-item">
+                    <i class="bi bi-car-front"></i>
+                    <div>
+                        <strong>Tipo</strong>
+                        <span>Automóvel</span>
+                    </div>
+                </div>
+
             </div>
-        `;
+
+            <button class="btn btn-primary btn-favorito-premium"
+                onclick='adicionarFavorito(${JSON.stringify(veiculo)})'>
+                <i class="bi bi-heart"></i>
+                Adicionar aos Favoritos
+            </button>
+
+        </div>
+    </div>
+`;
 
         registrarConsulta(veiculo);
 
