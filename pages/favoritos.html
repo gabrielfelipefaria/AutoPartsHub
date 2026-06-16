@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favoritos | AutoParts Hub</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="../index.html">
+            <img src="../assets/img/logo.png" alt="Logo">
+            <span>AutoParts Hub</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="veiculos.html">Veículos</a></li>
+                <li class="nav-item"><a class="nav-link" href="marcas.html">Marcas</a></li>
+                <li class="nav-item"><a class="nav-link active" href="favoritos.html">Favoritos</a></li>
+                <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <span class="badge bg-primary mb-3">LocalStorage</span>
+        <h1>Veículos Favoritos</h1>
+        <p>Consulte rapidamente os veículos salvos durante sua navegação.</p>
+    </div>
+</header>
+
+<main class="container py-5">
+
+    <div class="favorites-toolbar mb-4">
+        <div>
+            <h2 class="section-title mb-1">Meus Favoritos</h2>
+            <p class="text-muted mb-0">
+                Veículos salvos para consulta rápida.
+            </p>
+        </div>
+
+        <button class="btn btn-outline-danger" onclick="limparFavoritos()">
+            <i class="bi bi-trash"></i>
+            Limpar favoritos
+        </button>
+    </div>
+
+    <div id="listaFavoritos" class="row g-4"></div>
+
+</main>
+
+<footer>
+    <div class="container text-center">
+        <h4>AutoParts Hub</h4>
+        <p>Portal de Consulta FIPE e Veículos</p>
+    </div>
+</footer>
+
+<script src="../assets/js/favoritos.js"></script>
+
+<script>
+    const lista = document.getElementById("listaFavoritos");
+
+    function carregarFavoritos() {
+        const favoritos = obterFavoritos();
+
+        if (favoritos.length === 0) {
+            lista.innerHTML = `
+                <div class="col-12">
+                    <div class="card-custom text-center">
+                        <i class="bi bi-heart fs-1 text-primary"></i>
+                        <h4 class="mt-3">Nenhum favorito salvo</h4>
+                        <p class="text-muted">
+                            Consulte um veículo e clique em "Adicionar aos Favoritos".
+                        </p>
+                        <a href="veiculos.html" class="btn btn-primary">
+                            Consultar veículos
+                        </a>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        lista.innerHTML = "";
+
+        favoritos.forEach((veiculo, index) => {
+    lista.innerHTML += `
+        <div class="col-md-6 col-lg-4">
+            <div class="favorite-card">
+                <div class="favorite-icon">
+                    <i class="bi bi-heart-fill"></i>
+                </div>
+
+                <span class="badge bg-primary mb-3">Favorito</span>
+
+                <h4>${veiculo.Marca}</h4>
+
+                <p class="text-muted favorite-model">
+                    ${veiculo.Modelo}
+                </p>
+
+                <div class="favorite-info">
+                    <div>
+                        <strong>Valor FIPE</strong>
+                        <span>${veiculo.Valor}</span>
+                    </div>
+
+                    <div>
+                        <strong>Ano</strong>
+                        <span>${veiculo.AnoModelo}</span>
+                    </div>
+
+                    <div>
+                        <strong>Combustível</strong>
+                        <span>${veiculo.Combustivel}</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-outline-danger w-100 mt-4" onclick="removerFavorito(${index})">
+                    <i class="bi bi-trash"></i>
+                    Remover dos favoritos
+                </button>
+            </div>
+        </div>
+    `;
+});
+}
+
+    function removerFavorito(index) {
+        const favoritos = obterFavoritos();
+        favoritos.splice(index, 1);
+        salvarFavoritos(favoritos);
+        carregarFavoritos();
+    }
+
+    function limparFavoritos() {
+        localStorage.removeItem("favoritos");
+        carregarFavoritos();
+    }
+
+    carregarFavoritos();
+</script>
+
+</body>
+</html>

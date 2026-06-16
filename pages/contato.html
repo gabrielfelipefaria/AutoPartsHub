@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato | AutoParts Hub</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="../index.html">
+            <img src="../assets/img/logo.png" alt="Logo">
+            <span>AutoParts Hub</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="veiculos.html">Veículos</a></li>
+                <li class="nav-item"><a class="nav-link" href="marcas.html">Marcas</a></li>
+                <li class="nav-item"><a class="nav-link" href="favoritos.html">Favoritos</a></li>
+                <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link active" href="contato.html">Contato</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <span class="badge bg-primary mb-3">Fale Conosco</span>
+        <h1>Contato</h1>
+        <p>Envie dúvidas, sugestões ou comentários sobre o AutoParts Hub.</p>
+    </div>
+</header>
+
+<main class="container py-5">
+    <div class="row g-4">
+
+        <div class="col-lg-7">
+            <div class="card-custom">
+                <h3 class="mb-4">Enviar Mensagem</h3>
+
+                <form id="formContato">
+                    <div class="mb-3">
+                        <label class="form-label">Nome</label>
+                        <input type="text" id="nome" class="form-control" placeholder="Digite seu nome">
+                        <small class="text-danger d-none" id="erroNome">Informe seu nome.</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">E-mail</label>
+                        <input type="email" id="email" class="form-control" placeholder="Digite seu e-mail">
+                        <small class="text-danger d-none" id="erroEmail">Informe um e-mail válido.</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Assunto</label>
+                        <select id="assunto" class="form-select">
+                            <option value="">Selecione</option>
+                            <option>Dúvida sobre veículos</option>
+                            <option>Sugestão de melhoria</option>
+                            <option>Problema no sistema</option>
+                            <option>Outro</option>
+                        </select>
+                        <small class="text-danger d-none" id="erroAssunto">Selecione um assunto.</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Mensagem</label>
+                        <textarea id="mensagem" class="form-control" rows="5" placeholder="Digite sua mensagem"></textarea>
+                        <small class="text-danger d-none" id="erroMensagem">Digite uma mensagem.</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-send"></i>
+                        Enviar
+                    </button>
+                </form>
+
+                <div class="alert alert-success mt-4 d-none" id="sucessoContato">
+                    Mensagem enviada com sucesso! Obrigado pelo contato.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="card-custom mb-4">
+                <h4>Informações do Projeto</h4>
+                <p class="text-muted">
+                    O AutoParts Hub é uma aplicação web acadêmica voltada à consulta de veículos por meio da API FIPE.
+                </p>
+
+                <div class="info-mini mb-3">
+                    <strong>Categoria</strong>
+                    <span>Sistema Web Interativo</span>
+                </div>
+
+                <div class="info-mini mb-3">
+                    <strong>Tecnologias</strong>
+                    <span>HTML, CSS, JavaScript, Bootstrap e API REST</span>
+                </div>
+
+                <div class="info-mini">
+                    <strong>Foco</strong>
+                    <span>UX, IHC, responsividade e dados dinâmicos</span>
+                </div>
+            </div>
+
+            <div class="card-custom">
+                <h4>Critérios Atendidos</h4>
+                <ul class="text-muted mb-0">
+                    <li>Múltiplas páginas conectadas</li>
+                    <li>Consumo de API externa</li>
+                    <li>Interface responsiva</li>
+                    <li>Aplicação de UX e IHC</li>
+                    <li>Feedback ao usuário</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    <div class="container text-center">
+        <h4>AutoParts Hub</h4>
+        <p>Portal de Consulta FIPE e Veículos</p>
+    </div>
+</footer>
+
+<script>
+    const form = document.getElementById("formContato");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const nome = document.getElementById("nome");
+        const email = document.getElementById("email");
+        const assunto = document.getElementById("assunto");
+        const mensagem = document.getElementById("mensagem");
+
+        const erroNome = document.getElementById("erroNome");
+        const erroEmail = document.getElementById("erroEmail");
+        const erroAssunto = document.getElementById("erroAssunto");
+        const erroMensagem = document.getElementById("erroMensagem");
+        const sucessoContato = document.getElementById("sucessoContato");
+
+        erroNome.classList.add("d-none");
+        erroEmail.classList.add("d-none");
+        erroAssunto.classList.add("d-none");
+        erroMensagem.classList.add("d-none");
+        sucessoContato.classList.add("d-none");
+
+        let valido = true;
+
+        if (nome.value.trim() === "") {
+            erroNome.classList.remove("d-none");
+            valido = false;
+        }
+
+        if (email.value.trim() === "" || !email.value.includes("@")) {
+            erroEmail.classList.remove("d-none");
+            valido = false;
+        }
+
+        if (assunto.value === "") {
+            erroAssunto.classList.remove("d-none");
+            valido = false;
+        }
+
+        if (mensagem.value.trim() === "") {
+            erroMensagem.classList.remove("d-none");
+            valido = false;
+        }
+
+        if (valido) {
+            sucessoContato.classList.remove("d-none");
+            form.reset();
+        }
+    });
+</script>
+
+</body>
+</html>
